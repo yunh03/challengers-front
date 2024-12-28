@@ -16,41 +16,36 @@ const Index = () => {
   const { clubId } = useParams();
   const { accessToken } = useSelector(selectUser);
 
-  // if (isError) {
-  //   return '클럽 매니저 권한이 없습니다';
-  // }
-  // if (!accessToken && isError) {
-  //   return '로그인 해주세요';
-  // }
-  // if (isError) {
-  //   return '클럽 매니저 권한이 없습니다';
-  // }
   return (
     <Inner>
       <Banner />
       <Section gap="3.2">
         <ApiFetcher
           query={useGetClubDetailQuery({ clubId, accessToken })}
-          loading={<div>로딩중</div>}
+          loading={<div>로딩중...</div>}
         >
-          {(data) => (
-            <>
-              <TextBox>
-                <Header2>클럽 : {data.clubName} </Header2>
-                <NavigateButton />
-              </TextBox>
+          {(data) => {
+            if (!data) return null;
+            return (
+              <>
+                <TextBox>
+                  <Header2>클럽 : {data.clubName} </Header2>
+                  <NavigateButton />
+                </TextBox>
 
-              <ChallengersLogo src={data.logoUrl} alt={data.clubName} />
-            </>
-          )}
+                <ChallengersLogo src={data.logoUrl} alt={data.clubName} />
+              </>
+            );
+          }}
         </ApiFetcher>
 
         <ApiFetcher
           query={useGetPendingUsersQuery({ clubId, accessToken })}
-          loading={<div>로딩중</div>}
+          loading={<div>로딩중...</div>}
         >
-          {(data) =>
-            data.map((user: any) => (
+          {(data) => {
+            if (!data) return null;
+            return data.map((user) => (
               <ClubAcceptBox
                 email={user.email}
                 key={user.id}
@@ -58,8 +53,8 @@ const Index = () => {
                 id={clubId}
                 comment={user.comment}
               />
-            ))
-          }
+            ));
+          }}
         </ApiFetcher>
       </Section>
     </Inner>
