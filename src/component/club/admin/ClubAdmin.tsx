@@ -16,49 +16,49 @@ const Index = () => {
   const { clubId } = useParams();
   const { accessToken } = useSelector(selectUser);
 
-  return (
-    <Inner>
-      <Banner />
-      <Section gap="3.2">
-        <ApiFetcher
-          query={useGetClubDetailQuery({ clubId, accessToken })}
-          loading={<div>로딩중...</div>}
-        >
-          {(data) => {
-            if (!data) return null;
-            return (
-              <>
-                <TextBox>
-                  <Header2>클럽 : {data.clubName} </Header2>
-                  <NavigateButton />
-                </TextBox>
+  // return (
+  //   <Inner>
+  //     <Banner />
+  //     <Section gap="3.2">
+  //       <ApiFetcher
+  //         query={useGetClubDetailQuery({ clubId, accessToken })}
+  //         loading={<div>로딩중...</div>}
+  //       >
+  //         {(data) => {
+  //           if (!data) return null;
+  //           return (
+  //             <>
+  //               <TextBox>
+  //                 <Header2>클럽 : {data.clubName} </Header2>
+  //                 <NavigateButton />
+  //               </TextBox>
 
-                <ChallengersLogo src={data.logoUrl} alt={data.clubName} />
-              </>
-            );
-          }}
-        </ApiFetcher>
+  //               <ChallengersLogo src={data.logoUrl} alt={data.clubName} />
+  //             </>
+  //           );
+  //         }}
+  //       </ApiFetcher>
 
-        <ApiFetcher
-          query={useGetPendingUsersQuery({ clubId, accessToken })}
-          loading={<div>로딩중...</div>}
-        >
-          {(data) => {
-            if (!data) return null;
-            return data.map((user) => (
-              <ClubAcceptBox
-                email={user.email}
-                key={user.id}
-                name={user.name}
-                id={clubId}
-                comment={user.comment}
-              />
-            ));
-          }}
-        </ApiFetcher>
-      </Section>
-    </Inner>
-  );
+  //       <ApiFetcher
+  //         query={useGetPendingUsersQuery({ clubId, accessToken })}
+  //         loading={<div>로딩중...</div>}
+  //       >
+  //         {(data) => {
+  //           if (!data) return null;
+  //           return data.map((user) => (
+  //             <ClubAcceptBox
+  //               email={user.email}
+  //               key={user.id}
+  //               name={user.name}
+  //               id={clubId}
+  //               comment={user.comment}
+  //             />
+  //           ));
+  //         }}
+  //       </ApiFetcher>
+  //     </Section>
+  //   </Inner>
+  // );
 };
 
 export default Index;
