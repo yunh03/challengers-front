@@ -8,9 +8,11 @@ export interface ContainerType {
   id?: string;
   ref?: React.RefObject<any>;
 }
+
 export interface StyleType {
   style: SerializedStyles;
 }
+
 export interface StyleContainerType {
   children: ReactNode;
   style?: SerializedStyles;
@@ -18,7 +20,6 @@ export interface StyleContainerType {
 }
 
 // Main Page
-
 // Project Page
 export interface ProjectBoxProps {
   id: number;
@@ -34,56 +35,65 @@ export interface SortType {
   stack: string[];
   sort: string;
 }
+
 export interface SelectBoxDropBoxProps {
   options?: string[];
   value: 'service' | 'sort' | 'stack';
   sortType: SortType;
   setSortType: React.Dispatch<React.SetStateAction<SortType>>;
 }
+
 export interface SelectedBoxProps extends ContainerType {
   value: 'service' | 'sort' | 'stack';
   setShowOptions: React.Dispatch<React.SetStateAction<boolean>>;
   showOptions: boolean;
 }
+
 export interface SelectBoxContainerProps {
   children: React.ReactNode;
   showOptions: boolean;
 }
+
 export interface ReturnStackProps {
   stack: string;
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
+
 export interface TechStacksModalProps {
   value: string;
   setSortType: React.Dispatch<React.SetStateAction<SortType>>;
 }
 
 // Detail Page
-
 interface Crew {
   name: string;
   role: string;
 }
+
 export interface TeamInfoProps {
   id: number;
   position: string;
   crew: Crew[];
 }
+
 export interface ProjectCrew {
   id: number;
   name: string;
   position: string;
   role: string;
 }
+
 export interface ProjectLink {
   id: number;
   url: string;
   name: string;
 }
+
 export interface ProjectTechStack {
   id: number;
   name: string;
 }
+
 export interface ProjectDetailProps extends ProjectBoxProps {
   id: number;
   projectName: string;
@@ -91,7 +101,6 @@ export interface ProjectDetailProps extends ProjectBoxProps {
   imageUrl: string;
   projectCategory: string;
   belongedClubName: string;
-
   projectDetail: string;
   projectStatus: 1;
   projectTechStack: ProjectTechStack[];
@@ -99,8 +108,8 @@ export interface ProjectDetailProps extends ProjectBoxProps {
   projectCrew: ProjectCrew[];
   createdAt: Date;
   updatedAt: Date;
-  uploadedUserId: 1;
-  belongedClubId: null;
+  uploadedUserId: number;
+  belongedClubId: number | null;
   projectPeriod: string;
 }
 
@@ -109,7 +118,6 @@ export interface NavItemProps extends ContainerType {
 }
 
 // MyPage
-
 // Modal
 export interface RegisterModalInputProps {
   register: UseFormRegisterReturn;
@@ -121,7 +129,7 @@ export interface TimerBlockProps {
   remainingTime: number;
   handleReSend: () => void;
 }
-//
+
 export interface SelectBoxProps {
   options: string[];
   value: string;
@@ -129,6 +137,7 @@ export interface SelectBoxProps {
   background?: string;
   customStyle?: any;
 }
+
 export type T = string | number;
 
 export interface SelectBoxProps2 {
@@ -169,6 +178,7 @@ export interface ClubComponentProps {
   name: string;
   logo: string;
 }
+
 export interface MyClubDataType extends ClubComponentProps {
   managerEmail: string;
   manager: boolean;
@@ -217,6 +227,7 @@ export interface SignUpState {
   password: string;
   userName: string;
 }
+
 export interface TextInputBoxType {
   type: 'header1' | 'body2' | 'body1' | 'border';
   text?: string;
@@ -251,9 +262,11 @@ interface Link {
   name: string;
   linkUrl: string;
 }
+
 export interface Stack {
   name: string;
 }
+
 export interface Crews {
   name: string;
   position: string;
@@ -270,9 +283,10 @@ export interface ProjectInfo {
   projectLink: Link[];
   projectName: string;
   projectPeriod: string;
-  status: String;
+  status: string;
   projectTechStack: Stack[];
 }
+
 export const initialCrews: Crews = {
   name: '',
   position: '',
@@ -282,10 +296,12 @@ export const initialCrews: Crews = {
 export const initialStack: Stack = {
   name: '',
 };
+
 export const initialLink: Link = {
   name: '',
   linkUrl: '',
 };
+
 export const initialProjectData: ProjectInfo = {
   belongedClubId: 1,
   imageUrl: '',
@@ -327,6 +343,7 @@ export interface FetcherProps {
 export interface setImgFormDataType {
   setImgFormData: React.Dispatch<React.SetStateAction<File | undefined>>;
 }
+
 export interface StackTagInputProps {
   onAddStackTag: (tag: string) => void;
   stackTags: string[];
