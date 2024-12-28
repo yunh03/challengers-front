@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Body1 } from '../component/emotion/GlobalStyle';
@@ -7,7 +7,6 @@ import { useRefreshUserMutation } from '../store/controller/signUpController';
 import { getCookie } from '../store/cookie';
 import { setUser } from '../store/slice/userSlice';
 
-// 경로에 변화가 생기거나 새로고침 시 페이지의 최상단으로 이동
 export const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -17,15 +16,6 @@ export const ScrollToTop = () => {
 
   return null;
 };
-
-// // 새로고침 시 자동으로 이전 스크롤 위치로 이동하는 것을 방지
-// export const PreventAutoScroll = () => {
-//   useEffect(() => {
-//     window.onbeforeunload = function pushRefresh() {
-//       window.scrollTo(0, 0);
-//     };
-//   }, []);
-// };
 
 export const RefreshTokenUtil = () => {
   const dispatch = useDispatch();
@@ -43,16 +33,13 @@ export const RefreshTokenUtil = () => {
         }
       };
 
-      // 최초 실행
       fetchData();
-      // 29분마다 실행
       const interval = setInterval(fetchData, 29 * 60 * 1000);
-      // 컴포넌트가 unmount될 때 interval을 정리
       return () => {
         clearInterval(interval);
       };
     }
-    return () => {}; // 값을 반환
+    return () => {};
   }, []);
 };
 
@@ -61,10 +48,9 @@ export const ApiFetcher = ({ query, children, loading }: FetcherProps) => {
 
   if (isLoading) return loading;
   if (isError) {
-    console.log(error);
+    console.error(error);
     return <Body1>Api 통신 에러!</Body1>;
   }
 
-  // 호출 시 data 값을 children으로 전달
-  return children(data);
+  return <>{children(data)}</>;
 };
